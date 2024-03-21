@@ -1,28 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import AuthService from "../services/auth.serveice";
+import { useNavigate } from "react-router-dom";
 
 const LoginComponent = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
 
+  const navigate = useNavigate();
+
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+  let [message, setMessage] = useState("");
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleLogin = async () => {
+    try {
+      let response = await AuthService.login(email, password);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      window.alert("登入成功，您現在將被重新導向個人資料頁面");
+      navigate("/profile");
+    } catch (e) {
+      setMessage(e.response.data);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
+        {message && <div className="alert alert-danger">{message}</div>}
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
         </label>
 
         <input
+          onChange={handleEmail}
           type="email"
           className="form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
         />
-
-        <div id="emailHelp" className="form-text">
-          {" "}
-          We'll never share your email with anyone else.{" "}
-        </div>
       </div>
 
       <div className="mb-3">
@@ -30,6 +53,7 @@ const LoginComponent = () => {
           Password
         </label>
         <input
+          onChange={handlePassword}
           type="password"
           className="form-control"
           id="exampleInputPassword1"
@@ -47,8 +71,8 @@ const LoginComponent = () => {
         </label>
       </div>
 
-      <button type="submit" className="btn btn-primary">
-        Submit
+      <button className="btn btn-primary" onClick={handleLogin}>
+        登入
       </button>
     </form>
   );

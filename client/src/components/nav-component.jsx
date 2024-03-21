@@ -1,11 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AuthServeice from "../services/auth.serveice";
 
 const NavComponent = () => {
+  const handleLogout = () => {
+    AuthServeice.logout();
+    window.alert("登出成功，即將被導向首頁");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" a="/">
           <img src="logo.png" alt="logo" width={90} height={40} />
         </Link>
         <button
@@ -82,6 +88,12 @@ const NavComponent = () => {
                   </a>
                 </li>
               </ul>
+            </li>
+
+            <li className="nav-item">
+              <Link onClick={handleLogout} className="nav-link" to="/">
+                登出
+              </Link>
             </li>
           </ul>
 

@@ -9,8 +9,18 @@ class AuthService {
       password,
     });
   }
-  login() {}
-  logout() {}
+  login(email, password) {
+    return axios.post(API_URL + "/login", {
+      email,
+      password,
+    });
+  }
+  logout() {
+    localStorage.removeItem("user");
+  }
+  getCurrentUser() {
+    return JSON.parse(localStorage.getItem("user"));
+  }
 }
 
 export default new AuthService();

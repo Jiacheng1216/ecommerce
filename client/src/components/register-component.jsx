@@ -42,7 +42,7 @@ const RegisterComponent = () => {
         {message && <div className="alert alert-danger">{message}</div>}
 
         <label htmlFor="exampleInputEmail1" className="form-label">
-          Email address
+          電子信箱
         </label>
         <input
           onChange={handleEmail}
@@ -51,15 +51,11 @@ const RegisterComponent = () => {
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
         />
-        <div id="emailHelp" className="form-text">
-          {" "}
-          We'll never share your email with anyone else.{" "}
-        </div>
       </div>
 
       <div className="mb-3">
         <label htmlFor="exampleInputUsername" className="form-label">
-          username
+          用戶名稱
         </label>
         <input
           onChange={handleUsername}
@@ -71,7 +67,7 @@ const RegisterComponent = () => {
 
       <div className="mb-3">
         <label htmlFor="exampleInputPassword1" className="form-label">
-          Password
+          密碼
         </label>
         <input
           onChange={handlePassword}
@@ -92,12 +88,8 @@ const RegisterComponent = () => {
         </label>
       </div>
 
-      <button
-        onClick={handleRegister}
-        type="submit"
-        className="btn btn-primary"
-      >
-        Submit
+      <button onClick={handleRegister} className="btn btn-primary">
+        註冊
       </button>
     </form>
   );

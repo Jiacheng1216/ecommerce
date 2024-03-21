@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 const authRoute = require("./routes").auth;
+const cors = require("cors");
 
 //連結到mongoDB
 mongoose
@@ -18,6 +19,7 @@ mongoose
 // moddlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use("/api/user", authRoute);
 

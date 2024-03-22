@@ -63,51 +63,33 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
               </li>
             )}
 
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                選項
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li>
-
             {currentUser && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/profile">
-                  個人頁面
-                </Link>
-              </li>
-            )}
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  選項
+                </a>
+                <ul className="dropdown-menu">
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/profile">
+                      個人頁面
+                    </Link>
+                  </li>
 
-            {currentUser && (
-              <li className="nav-item">
-                <Link onClick={handleLogout} className="nav-link" to="/">
-                  登出
-                </Link>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li className="nav-item">
+                    <Link onClick={handleLogout} className="nav-link" to="/">
+                      登出
+                    </Link>
+                  </li>
+                </ul>
               </li>
             )}
           </ul>

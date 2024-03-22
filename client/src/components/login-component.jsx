@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import AuthService from "../services/auth.serveice";
+import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 
-const LoginComponent = () => {
+const LoginComponent = ({ currentUser, setCurrentUser }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -25,6 +25,7 @@ const LoginComponent = () => {
       let response = await AuthService.login(email, password);
       localStorage.setItem("user", JSON.stringify(response.data));
       window.alert("登入成功，您現在將被重新導向個人資料頁面");
+      setCurrentUser(AuthService.getCurrentUser());
       navigate("/profile");
     } catch (e) {
       setMessage(e.response.data);

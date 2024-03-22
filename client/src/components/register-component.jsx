@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AuthService from "../services/auth.serveice";
+import AuthService from "../services/auth.service";
 //重新導向功能
 import { useNavigate } from "react-router-dom";
 

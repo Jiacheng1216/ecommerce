@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const itemSchema = new Schema({
-  id: { type: String },
   title: {
     type: String,
     require: true,
@@ -16,8 +15,12 @@ const itemSchema = new Schema({
     require: true,
   },
   seller: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    sellerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    sellerName: { type: mongoose.Schema.Types.String, ref: "User" },
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 

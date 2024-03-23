@@ -1,13 +1,29 @@
 import { useState, useEffect } from "react";
 import AuthService from "../services/auth.service";
+import ItemService from "../services/item.service";
 
 const ProfileComponent = ({ currentUser, setCurrentUser }) => {
+  const [itemData, setItemData] = useState([]);
+
+  useEffect(() => {
+    const fetchItem = async () => {
+      try {
+        const response = await ItemService.getSelf(currentUser.user._id);
+        setItemData(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    fetchItem();
+  }, []);
+
   return (
     <div style={{ padding: "3rem" }}>
       {!currentUser && <div>在獲取您的個人資料之前，您必須先登錄。</div>}
       {currentUser && (
         <div>
-          <h2>以下是您的個人檔案：</h2>
+          <h2>以下是您的個人資料：</h2>
 
           <table className="table">
             <tbody>
@@ -28,6 +44,42 @@ const ProfileComponent = ({ currentUser, setCurrentUser }) => {
               </tr>
             </tbody>
           </table>
+        </div>
+      )}
+      <br></br>
+
+      {currentUser && (
+        <div>
+          <h2>您刊登的商品</h2>
+          {itemData && itemData.length != 0 && (
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
+              {itemData.map((item) => {
+                return (
+                  <div
+                    className="card"
+                    style={{ width: "18rem", margin: "1rem" }}
+                  >
+                    <div className="card-body">
+                      <h4 className="card-title">
+                        賣家名稱:{item.seller.sellerName}
+                      </h4>
+                      <h5 className="card-title">商品名稱:{item.title}</h5>
+                      <p
+                        style={{ margin: "0.5rem 0rem" }}
+                        className="card-text"
+                      >
+                        {item.description}
+                      </p>
+                      <p style={{ margin: "0.5rem 0rem" }}>價格:{item.price}</p>
+                      <p style={{ margin: "0.5rem 0rem" }}>
+                        上傳時間:{item.date}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
     </div>

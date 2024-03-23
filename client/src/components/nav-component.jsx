@@ -36,9 +36,9 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Link
-              </a>
+              <Link className="nav-link" to="/item">
+                商品一覽
+              </Link>
             </li>
 
             <li className="nav-item">
@@ -78,6 +78,12 @@ const NavComponent = ({ currentUser, setCurrentUser }) => {
                   <li className="nav-item">
                     <Link className="nav-link" to="/profile">
                       個人頁面
+                    </Link>
+                  </li>
+
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/postItem">
+                      我要刊登
                     </Link>
                   </li>
 

@@ -21,8 +21,9 @@ const loginValidation = (data) => {
 
 const itemValidation = (data) => {
   const schema = Joi.object({
-    title: Joi.string().min(6).max(50).required(),
-    description: Joi.string().min(6).max(50).required(),
+    seller: Joi.object().required(),
+    title: Joi.string().min(1).max(50).required(),
+    description: Joi.string().min(1).max(50).required(),
     price: Joi.number().min(10).max(9999).required(),
   });
   return schema.validate(data);

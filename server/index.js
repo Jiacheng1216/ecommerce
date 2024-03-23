@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 const authRoute = require("./routes").auth;
+const itemRoute = require("./routes").itemAuth;
 const cors = require("cors");
 
 //連結到mongoDB
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/api/user", authRoute);
+app.use("/api/item", itemRoute);
 
 //連結到後端伺服器
 app.listen(8080, () => {

@@ -5,6 +5,8 @@ import Login from "./components/login-component";
 import Profile from "./components/profile-component";
 import { useState } from "react";
 import AuthService from "./services/auth.service";
+import ItemComponent from "./components/item-component";
+import PostItemComponent from "./components/postItem-component";
 
 function App() {
   let [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
@@ -18,6 +20,7 @@ function App() {
           }
         >
           <Route path="register" element={<Register />} />
+
           <Route
             path="login"
             element={
@@ -27,10 +30,31 @@ function App() {
               />
             }
           />
+
           <Route
             path="profile"
             element={
               <Profile
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+              />
+            }
+          />
+
+          <Route
+            path="item"
+            element={
+              <ItemComponent
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+              />
+            }
+          />
+
+          <Route
+            path="postItem"
+            element={
+              <PostItemComponent
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
               />

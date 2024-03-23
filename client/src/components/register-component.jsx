@@ -37,7 +37,7 @@ const RegisterComponent = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ padding: "5rem" }}>
       <div className="mb-3">
         {message && <div className="alert alert-danger">{message}</div>}
 

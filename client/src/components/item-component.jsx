@@ -4,7 +4,6 @@ import ItemService from "../services/item.service";
 
 const ItemComponent = ({ currentUser, setCurrentUser }) => {
   const navigate = useNavigate();
-
   const [itemData, setItemData] = useState([]);
 
   useEffect(() => {
@@ -33,6 +32,11 @@ const ItemComponent = ({ currentUser, setCurrentUser }) => {
           {itemData.map((item) => {
             return (
               <div className="card" style={{ width: "18rem", margin: "1rem" }}>
+                <img
+                  src={`http://localhost:8080/images/${item.imagePath}`}
+                  class="card-img-top"
+                  alt="..."
+                ></img>
                 <div className="card-body">
                   <h4 className="card-title">
                     賣家名稱:{item.seller.sellerName}
@@ -41,7 +45,7 @@ const ItemComponent = ({ currentUser, setCurrentUser }) => {
                   <p style={{ margin: "0.5rem 0rem" }} className="card-text">
                     {item.description}
                   </p>
-                  <p style={{ margin: "0.5rem 0rem" }}>價格:{item.price}</p>
+                  <p style={{ margin: "0.5rem 0rem" }}>價格: {item.price} $</p>
                   <p style={{ margin: "0.5rem 0rem" }}>上傳時間:{item.date}</p>
                 </div>
               </div>

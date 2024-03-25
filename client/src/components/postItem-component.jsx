@@ -12,6 +12,9 @@ const PostItemComponent = ({ currentUser, setCurrentUser }) => {
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [price, setPrice] = useState("");
+  //選擇檔案 上傳圖片
+  let [selectedFile, setSelectedFile] = useState(null);
+  let [image, setImage] = useState(null);
   let [message, setMessage] = useState("");
 
   const handleTitle = (e) => {
@@ -26,21 +29,62 @@ const PostItemComponent = ({ currentUser, setCurrentUser }) => {
     setPrice(e.target.value);
   };
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+
+    //預覽圖片功能
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handlePostItem = async () => {
+    if (!selectedFile) {
+      window.alert("請至少上傳一張圖片!");
+      return;
+    }
+
+    //圖片上傳功能
+    const formData = new FormData();
+    formData.append("photo", selectedFile);
+
     try {
-      let response = await ItemService.post(title, description, price, {
-        sellerId: currentUser.user._id,
-        sellerName: currentUser.user.username,
-      });
+      let response = await ItemService.postPhoto(formData);
+    } catch (e) {
+      setMessage(e.response.data);
+    }
+
+    try {
+      let response = await ItemService.post(
+        title,
+        description,
+        price,
+        {
+          sellerId: currentUser.user._id,
+          sellerName: currentUser.user.username,
+        },
+        selectedFile.name
+      );
       window.alert("刊登商品成功!");
-      navigate("/item");
+      navigate("/profile");
     } catch (e) {
       setMessage(e.response.data);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ padding: "5rem" }}>
+    <form
+      action="/profile"
+      method="post"
+      onSubmit={handleSubmit}
+      style={{ padding: "5rem" }}
+      encType="multipart/form-data"
+    >
       <div className="mb-3">
         {message && <div className="alert alert-danger">{message}</div>}
         <label htmlFor="exampleInputTitle" className="form-label">
@@ -53,6 +97,21 @@ const PostItemComponent = ({ currentUser, setCurrentUser }) => {
           className="form-control"
           id="exampleInputTitle"
         />
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="examplephoto" className="form-label">
+          商品圖片:
+        </label>
+        <input
+          name="photo"
+          type="file"
+          onChange={handleFileChange}
+          className="form-control"
+          id="examplephoto"
+        />
+        <br></br>
+        <img src={image} class="img-thumbnail" alt="Preview"></img>
       </div>
 
       <div className="mb-3">

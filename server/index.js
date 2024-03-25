@@ -17,11 +17,13 @@ mongoose
     console.log(e);
   });
 
-// moddlewares
+// middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+//當發送images的路由時,會導向uploads資料夾
+app.use("/images", express.static("uploads"));
 app.use("/api/user", authRoute);
 app.use("/api/item", itemRoute);
 

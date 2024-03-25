@@ -3,7 +3,7 @@ const API_URL = "http://localhost:8080/api/item";
 
 class ItemService {
   //上傳商品
-  post(title, description, price, seller) {
+  post(title, description, price, seller, imagePath) {
     let token;
     if (localStorage.getItem("user")) {
       token = JSON.parse(localStorage.getItem("user")).token;
@@ -13,13 +13,21 @@ class ItemService {
 
     return axios.post(
       API_URL,
-      { title, description, price, seller },
+      { title, description, price, seller, imagePath },
       {
         headers: {
           Authorization: token,
         },
       }
     );
+  }
+
+  postPhoto(fd) {
+    return axios.post(API_URL + "/postPhoto", fd, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   }
 
   //查詢所有商品

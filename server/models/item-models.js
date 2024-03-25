@@ -18,6 +18,9 @@ const itemSchema = new Schema({
     sellerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     sellerName: { type: mongoose.Schema.Types.String, ref: "User" },
   },
+  imagePath: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now,

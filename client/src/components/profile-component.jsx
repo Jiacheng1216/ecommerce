@@ -59,10 +59,12 @@ const ProfileComponent = ({ currentUser, setCurrentUser }) => {
                     className="card"
                     style={{ width: "18rem", margin: "1rem" }}
                   >
+                    <img
+                      src={`http://localhost:8080/images/${item.imagePath}`}
+                      class="card-img-top"
+                      alt="..."
+                    ></img>
                     <div className="card-body">
-                      <h4 className="card-title">
-                        賣家名稱:{item.seller.sellerName}
-                      </h4>
                       <h5 className="card-title">商品名稱:{item.title}</h5>
                       <p
                         style={{ margin: "0.5rem 0rem" }}
@@ -70,7 +72,9 @@ const ProfileComponent = ({ currentUser, setCurrentUser }) => {
                       >
                         {item.description}
                       </p>
-                      <p style={{ margin: "0.5rem 0rem" }}>價格:{item.price}</p>
+                      <p style={{ margin: "0.5rem 0rem" }}>
+                        價格:{item.price}$
+                      </p>
                       <p style={{ margin: "0.5rem 0rem" }}>
                         上傳時間:{item.date}
                       </p>

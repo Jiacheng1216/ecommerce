@@ -25,6 +25,7 @@ const itemValidation = (data) => {
     title: Joi.string().min(1).max(50).required(),
     description: Joi.string().min(1).max(50).required(),
     price: Joi.number().min(10).max(9999).required(),
+    imagePath: Joi.required(),
   });
   return schema.validate(data);
 };

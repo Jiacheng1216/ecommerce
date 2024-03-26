@@ -7,17 +7,18 @@ const ItemComponent = ({ currentUser, setCurrentUser }) => {
   const [itemData, setItemData] = useState([]);
 
   useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const response = await ItemService.get();
-        setItemData(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
     fetchItem();
   }, []);
+
+  //查找所有物品
+  const fetchItem = async () => {
+    try {
+      const response = await ItemService.get();
+      setItemData(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div style={{ padding: "3rem" }}>

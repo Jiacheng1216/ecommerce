@@ -57,6 +57,22 @@ router.post("/", async (req, res) => {
   }
 });
 
+//刪除商品
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const itemId = req.params.id;
+    const deleteItem = await Item.findByIdAndDelete(itemId);
+    if (!deleteItem) return res.status(404).json({ error: "商品未找到" });
+    return res.send({
+      msg: "刪除商品成功",
+      deleteItem,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("刪除商品時出錯");
+  }
+});
+
 //查詢資料庫中所有商品
 router.get("/showItems", async (req, res) => {
   try {

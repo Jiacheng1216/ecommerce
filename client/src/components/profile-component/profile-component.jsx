@@ -1,22 +1,40 @@
 import { useState, useEffect } from "react";
-import AuthService from "../services/auth.service";
-import ItemService from "../services/item.service";
+import AuthService from "../../services/auth.service";
+import ItemService from "../../services/item.service";
+import "./profile-component.css";
+import { useNavigate } from "react-router-dom";
 
 const ProfileComponent = ({ currentUser, setCurrentUser }) => {
   const [itemData, setItemData] = useState([]);
 
-  useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const response = await ItemService.getSelf(currentUser.user._id);
-        setItemData(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
+  const navigate = useNavigate();
 
+  useEffect(() => {
     fetchItem();
   }, []);
+
+  //進頁面時 查找個人刊登物品
+  const fetchItem = async () => {
+    try {
+      const response = await ItemService.getSelf(currentUser.user._id);
+      setItemData(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //刪除商品
+  const handleDeleteItem = async (id) => {
+    const comfirmed = window.confirm("您確定要刪除商品嗎? 該操作不可復原");
+    if (comfirmed) {
+      try {
+        let response = await ItemService.deleteItem(id);
+        fetchItem();
+      } catch (e) {
+        console.log(e.response.data);
+      }
+    }
+  };
 
   return (
     <div style={{ padding: "3rem" }}>
@@ -75,9 +93,17 @@ const ProfileComponent = ({ currentUser, setCurrentUser }) => {
                       <p style={{ margin: "0.5rem 0rem" }}>
                         價格:{item.price}$
                       </p>
-                      <p style={{ margin: "0.5rem 0rem" }}>
-                        上傳時間:{item.date}
-                      </p>
+                      <div className="timeAndDelete">
+                        <p style={{ margin: "0.5rem 0rem" }}>
+                          上傳時間:{item.date}
+                        </p>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          aria-label="Close"
+                          onClick={() => handleDeleteItem(item._id)}
+                        ></button>
+                      </div>
                     </div>
                   </div>
                 );

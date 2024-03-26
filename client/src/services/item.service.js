@@ -22,6 +22,7 @@ class ItemService {
     );
   }
 
+  //上傳商品照片
   postPhoto(fd) {
     return axios.post(API_URL + "/postPhoto", fd, {
       headers: {
@@ -38,6 +39,10 @@ class ItemService {
   //查詢個人商品
   getSelf(id) {
     return axios.get(API_URL + "/selfItems/" + id);
+  }
+
+  deleteItem(id) {
+    return axios.delete(API_URL + "/delete/" + id);
   }
 }
 

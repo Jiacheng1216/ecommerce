@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Register from "./components/register-component";
 import Login from "./components/login-component";
-import Profile from "./components/profile-component";
+import Profile from "./components/profile-component/profile-component";
 import { useState } from "react";
 import AuthService from "./services/auth.service";
 import ItemComponent from "./components/item-component";

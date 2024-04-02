@@ -1,4 +1,26 @@
 .timeAndDelete {
   display: flex;
   align-items: center;
+  justify-content: left;
+}
+
+.btn-close {
+  display: flex;
+  justify-content: right;
+  margin-left: 2em;
+}
+
+/* 個人資料區塊 */
+.profilediv {
+  padding-left: 8em;
+}
+
+/* 已刊登商品的區塊 */
+.postItem {
+  padding-left: 8em;
+}
+
+.link-style {
+  text-decoration: none; /* 移除超連結的底線 */
+  color: inherit; /* 保持連結的原本顏色 */
 }

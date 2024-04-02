@@ -1,0 +1,128 @@
+/* Logo */
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.logo img {
+  margin-right: 0.1px;
+}
+
+.logo p {
+  padding-top: 1em;
+  font-weight: 1000;
+}
+
+/* 導覽列 */
+.container-fluid {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  margin-top: -0.5em;
+  margin-bottom: -0.5em;
+  height: 5.5em;
+  padding-left: 11em;
+  padding-right: 0em;
+}
+
+/* 商品一覽 選項 */
+.navbar-collapse {
+  margin-left: 0px;
+  padding-right: 18em;
+}
+
+/* 搜尋框 */
+.search {
+  position: absolute;
+  top: 1.6em;
+  left: 40%;
+  .form-control {
+    width: 20em;
+  }
+}
+
+/* 登入按鈕 */
+.login-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8em;
+  height: 2.2em;
+  border-radius: 75px;
+  color: black;
+  font-weight: 1000;
+  font-size: 1.5em;
+  border: 1px solid;
+
+  position: absolute;
+  top: 0.75em;
+  left: 78%;
+  right: 12%;
+}
+
+.login-btn:hover {
+  transform: scale(1.07);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 選項 */
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 使用者選項和購物車的容器 */
+.dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 5em;
+  gap: 1vw;
+}
+
+/* 購物車圖示和數字的容器 */
+.navCartQuantityAndCart {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 購物車圖示的數字 */
+.navCartQuantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  width: 18px;
+  height: 18px;
+
+  font-size: 12px;
+  background-color: red;
+  border-radius: 75%;
+
+  z-index: 1;
+}
+
+/* 購物車圖示 */
+.dropdown img {
+  position: relative;
+  right: 1em;
+}
+
+.dropdown img:hover {
+  cursor: pointer;
+}
+
+.dropdown-toggle {
+  position: relative;
+}
+
+/* 下拉選單 */
+.dropdown-menu {
+  transform: translateX(-10%);
+}

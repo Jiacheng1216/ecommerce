@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Nav from "./nav-component";
-import ItemComponent from "./item-component";
+import Nav from "./NavComponent/nav-component.jsx";
 
 const Layout = ({ currentUser, setCurrentUser }) => {
   return (

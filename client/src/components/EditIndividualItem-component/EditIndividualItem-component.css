@@ -1,0 +1,23 @@
+/* 表格容器 */
+.editContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 5em;
+  margin-bottom: 10em;
+}
+
+/* 表格 */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid #ccc;
+  border-radius: 3%;
+  width: 50vw;
+}
+
+.quantityInput {
+  border: 1px solid #ccc;
+  border-radius: 10%;
+}

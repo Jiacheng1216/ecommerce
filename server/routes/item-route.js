@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const ItemValidation = require("../validation").itemValidation;
 const Item = require("../models").item;
-const User = require("../models").user;
 const multer = require("multer");
 const path = require("path");
 
@@ -31,19 +30,20 @@ router.post("/postPhoto", upload.single("photo"), async (req, res) => {
   }
 });
 
-//刊登商品的請求
+//刊登商品的router
 router.post("/", async (req, res) => {
   //確認資料是否符合規範
   let { error } = ItemValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   try {
-    let { title, description, price, seller, imagePath } = req.body;
+    let { title, description, price, seller, quantity, imagePath } = req.body;
     let postItem = new Item({
       title,
       description,
       price,
       seller,
+      quantity,
       imagePath,
     });
 
@@ -79,18 +79,54 @@ router.get("/showItems", async (req, res) => {
     const allItems = await Item.find();
     return res.send(allItems);
   } catch (e) {
+    res.status(500).send("無法查詢所有商品");
+  }
+});
+
+//以用戶id來查詢個人刊登的物品
+router.get("/selfItems/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const selfItems = await Item.find({ "seller.sellerId": userId });
+    res.send(selfItems);
+  } catch (e) {
+    res.status(500).send("無法查詢個人刊登商品");
+  }
+});
+
+//以商品id來查詢商品
+router.get("/findItem/:id", async (req, res) => {
+  try {
+    const itemId = req.params.id;
+    const findItem = await Item.findById({ _id: itemId });
+    res.send(findItem);
+  } catch (e) {
     console.log(e);
   }
 });
 
-//以id來查詢個人刊登的物品
-router.get("/selfItems/:id", async (req, res) => {
+//編輯商品資訊
+router.put("/edit/:id", async (req, res) => {
+  const itemId = req.params.id;
+  const { title, description, price, quantity, imagePath } = req.body;
+
   try {
-    const id = req.params.id;
-    const selfItems = await Item.find({ "seller.sellerId": id });
-    res.send(selfItems);
+    const item = await Item.findById(itemId);
+    if (!item) {
+      return res.status(404).send("商品未找到");
+    }
+
+    //更新商品資訊
+    item.title = title;
+    item.description = description;
+    item.price = price;
+    item.quantity = quantity;
+    item.imagePath = imagePath;
+
+    const updatedItem = await item.save();
+    res.status(200).send({ msg: "更新商品成功!", updatedItem });
   } catch (e) {
-    console.log(e);
+    res.status(500).send("無法更新商品資訊");
   }
 });
 

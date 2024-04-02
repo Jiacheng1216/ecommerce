@@ -21,6 +21,9 @@ const itemSchema = new Schema({
   imagePath: {
     type: String,
   },
+  quantity: {
+    type: Number,
+  },
   date: {
     type: Date,
     default: Date.now,

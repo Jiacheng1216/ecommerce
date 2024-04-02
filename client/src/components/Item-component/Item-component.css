@@ -1,0 +1,39 @@
+.hint {
+  display: flex;
+  font-size: 3em;
+  justify-content: center;
+}
+
+/* 商品一覽字樣 */
+.spil {
+  border-bottom: 2px solid gray;
+  margin-bottom: 2em;
+  padding-bottom: 1em;
+  margin-left: 8em;
+}
+
+/* 商品卡片的容器 */
+.card-container {
+  padding-left: 8em;
+}
+
+.shadow-on-hover {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.shadow-on-hover:hover {
+  transform: scale(1.07);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  height: 25px;
+  overflow: hidden;
+}
+
+.card-title {
+  height: 25px;
+  overflow: hidden;
+}

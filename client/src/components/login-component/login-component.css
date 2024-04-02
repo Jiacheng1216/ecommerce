@@ -1,0 +1,43 @@
+.loginPage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fce3fe;
+}
+
+.loginForm {
+  display: flex;
+  background-color: white;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+
+  width: 33vw; /* 设置宽度 */
+  height: 70vh; /* 设置高度 */
+}
+
+.loginInput {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.LoginAndRegister {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.LoginAndRegister .btn {
+  position: relative;
+  top: 1em;
+}
+
+.LoginAndRegister .form-check-label {
+  position: relative;
+  top: 1em;
+  margin-left: 2em;
+}

@@ -18,6 +18,7 @@ const PostItemComponent = ({ currentUser, setCurrentUser }) => {
   let [selectedFile, setSelectedFile] = useState(null);
   //預覽圖片
   let [image, setImage] = useState(null);
+  // 錯誤訊息
   let [message, setMessage] = useState("");
 
   const handleTitle = (e) => {
